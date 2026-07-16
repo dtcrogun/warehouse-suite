@@ -1,0 +1,429 @@
+# Warehouse Suite - Source of Truth Inventory v1.0
+
+## Document Control
+
+- Status: ACTIVE
+- Version: 1.3
+- Created date: 2026-07-16
+- Last updated: 2026-07-16
+- Owner: DucTrong Nguyen
+- Roadmap stage: Stage 0 - Project Charter and Source-of-Truth
+
+## 1. Purpose
+
+This document identifies the approved information sources for Warehouse Suite.
+
+AI and developers must use the documents listed here before designing collections, workflows, permissions, calculations, interfaces, or tests.
+
+If a required source is missing, incomplete, conflicting, or not approved, implementation must stop and report:
+
+`INSUFFICIENT EVIDENCE TO IMPLEMENT`
+
+AI must not replace missing evidence with assumptions.
+
+## 2. Evidence Status Definitions
+
+- APPROVED: The document is accepted as a controlling source.
+- ACTIVE: The document is currently maintained and may control project work.
+- DRAFT: The document is under development and must not control production behavior.
+- TO BE PROVIDED: The evidence does not yet exist in the repository.
+- TO BE CONFIRMED: Information exists partially but still requires owner confirmation.
+- BLOCKER: Work depending on this evidence must not begin.
+- REFERENCE ONLY: The document may provide context but does not override an approved source.
+
+## 3. Approved Project-Control Documents
+
+| ID | Document | Repository Path | Status | Controls |
+|---|---|---|---|---|
+| SOT-001 | MVP Scope v1.0 | docs/requirements/MVP_SCOPE_v1.0.md | APPROVED | MVP capabilities, exclusions, scope-control rules and success criteria |
+| SOT-002 | Project Charter v1.0 | docs/requirements/PROJECT_CHARTER_v1.0.md | APPROVED WITH ITEMS TO BE CONFIRMED | Objective, users, preliminary roles, deployment model, KPIs, approval responsibilities and open items |
+| SOT-003 | Source of Truth Inventory v1.0 | docs/requirements/SOURCE_OF_TRUTH_INVENTORY_v1.0.md | ACTIVE | Evidence register, evidence status and implementation blockers |
+
+## 4. Required Business and Process Sources
+
+| ID | Required Source | Planned Repository Path | Status | Required Before |
+|---|---|---|---|---|
+| SOT-010 | Cycle Count BRD and SRS | docs/requirements/cycle-count/Yeu_cau_App_Cycle_Count_BRDSRS_v2.9.docx | APPROVED - CONTROLLING SOURCE | Cycle Count schema, workflow, parser, business logic and regression tests |
+| SOT-011 | Current Cycle Count SOP | docs/workflows/cycle-count-current-process.md | TO BE PROVIDED - BLOCKER | Target workflow design |
+| SOT-012 | Target Cycle Count workflow | docs/workflows/cycle-count-target-process.md | TO BE CREATED - BLOCKER | Status model and module implementation |
+| SOT-013 | Recount and Approval rules | docs/workflows/recount-approval-rules.md | TO BE PROVIDED - BLOCKER | Recount or Approval implementation |
+| SOT-014 | Offline and synchronization rules | docs/workflows/offline-sync-rules.md | PARTIAL IN BRD/SRS v2.9 - BLOCKER | Full offline architecture, idempotency, retry and conflict implementation |
+| SOT-015 | Backup and Restore requirements | docs/requirements/backup-restore-requirements.md | TO BE PROVIDED | Backup and Restore implementation |
+| SOT-016 | Audit event requirements | docs/requirements/audit-event-catalogue.md | TO BE PROVIDED | Audit Log implementation |
+| SOT-017 | Dashboard KPI definitions | docs/requirements/cycle-count-kpi-definitions.md | TO BE PROVIDED | Dashboard calculations |
+
+## 5. Required Data Sources
+
+Only sanitized data may be committed to this public repository.
+
+| ID | Required Source | Planned Repository Path | Status | Required Before |
+|---|---|---|---|---|
+| SOT-020 | SKU source file | samples/source/sku/20260707153049Nguyen Duc Trong_SKU Basic Information_VN Ho Chi Minh DC.xls | APPROVED SOURCE - INTEGRITY VERIFIED | SKU schema, import and tests |
+| SOT-021 | Location source file | samples/source/location/Location master.xlsx | APPROVED SOURCE - INTEGRITY VERIFIED | Location schema, parser, import and tests |
+| SOT-022 | Inventory Golden Sample root | tests/fixtures/cycle-count/golden/20260715182904Nguyen Duc Trong_Location Inventory_VN Ho Chi Minh DC.xls | APPROVED - CONTROLLING ROOT | Inventory parser, snapshot, reconciliation and regression tests |
+| SOT-023 | Cycle Count task sample | samples/sanitized/cycle-count/tasks/ | TO BE PROVIDED | Task design and tests |
+| SOT-024 | Cycle Count result sample | samples/sanitized/cycle-count/results/ | TO BE PROVIDED | Result and variance design |
+| SOT-025 | Golden Sample profile and expected validation | docs/requirements/cycle-count/Yeu_cau_App_Cycle_Count_BRDSRS_v2.9.docx | APPROVED PROFILE - AUTOMATED EXPECTED OUTPUT STILL REQUIRED | Regression test implementation |
+| SOT-026 | Invalid and exception samples | tests/fixtures/cycle-count/negative/ | TO BE PROVIDED | Negative and exception tests |
+
+## 6. Required Data-Design Sources
+
+| ID | Required Source | Planned Repository Path | Status | Required Before |
+|---|---|---|---|---|
+| SOT-030 | SKU Data Dictionary | docs/data-dictionary/sku-data-dictionary.md | TO BE CREATED - BLOCKER | SKU collection migration |
+| SOT-031 | Location Data Dictionary | docs/data-dictionary/location-data-dictionary.md | TO BE CREATED - BLOCKER | Location collection migration |
+| SOT-032 | Inventory Data Dictionary | docs/data-dictionary/inventory-data-dictionary.md | TO BE CREATED - BLOCKER | Inventory collection migration |
+| SOT-033 | Cycle Count Data Dictionary | docs/data-dictionary/cycle-count-data-dictionary.md | TO BE CREATED - BLOCKER | Cycle Count collection migration |
+| SOT-034 | Entity Relationship Model | docs/architecture/entity-relationship-model.md | TO BE CREATED - BLOCKER | Database design approval |
+| SOT-035 | Inventory source-of-truth decision | docs/architecture/inventory-source-of-truth-decision.md | TO BE CONFIRMED - BLOCKER | Inventory balance, movement or posting design |
+| SOT-036 | Status and transition model | docs/workflows/cycle-count-status-model.md | TO BE CREATED - BLOCKER | Cycle Count workflow implementation |
+
+## 7. Required Security Sources
+
+| ID | Required Source | Planned Repository Path | Status | Required Before |
+|---|---|---|---|---|
+| SOT-040 | User and Role Matrix | docs/requirements/user-role-matrix.md | TO BE CONFIRMED - BLOCKER | Authentication and authorization implementation |
+| SOT-041 | Role and Action Permission Matrix | docs/requirements/permission-matrix.md | TO BE CREATED - BLOCKER | PocketBase API rules |
+| SOT-042 | Data-access rules | docs/requirements/data-access-rules.md | TO BE CREATED | Collection API rules |
+| SOT-043 | Session and authentication policy | docs/requirements/authentication-policy.md | TO BE CONFIRMED | Login implementation |
+| SOT-044 | Public repository security rules | .gitignore | ACTIVE | All repository work |
+
+## 8. Required Technical and Operational Sources
+
+| ID | Required Source | Planned Repository Path | Status | Required Before |
+|---|---|---|---|---|
+| SOT-050 | Architecture Decision Record | docs/architecture/ADR-001-platform-architecture.md | TO BE CREATED | Stage 1 completion |
+| SOT-051 | Supported device and browser matrix | docs/requirements/device-browser-matrix.md | TO BE CONFIRMED | Mobile and offline testing |
+| SOT-052 | Network and server design | docs/architecture/network-server-design.md | TO BE CONFIRMED | Pilot deployment |
+| SOT-053 | Backup retention and recovery targets | docs/requirements/recovery-targets.md | TO BE CONFIRMED | Backup design |
+| SOT-054 | Test Strategy | docs/requirements/test-strategy.md | TO BE CREATED - BLOCKER | Feature Release Gate |
+| SOT-055 | Deployment and rollback runbook | docs/requirements/deployment-runbook.md | TO BE CREATED | Pilot and Production Release |
+| SOT-056 | Performance benchmark plan | docs/requirements/performance-benchmark-plan.md | TO BE CREATED | Load-test approval |
+
+## 9. Evidence Priority
+
+### P0 - Must Be Supplied Before Stage 1 Can Close
+
+1. Cycle Count BRD and SRS.
+2. Current and target Cycle Count workflow.
+3. Recount and Approval rules.
+4. Offline and synchronization rules.
+5. Sanitized SKU sample.
+6. Sanitized Location sample.
+7. Sanitized Inventory sample.
+8. Golden Sample and expected output.
+9. User and Role Matrix.
+10. Inventory source-of-truth decision.
+
+### P1 - Required Before Related Module Implementation
+
+1. Audit event requirements.
+2. Dashboard KPI definitions.
+3. Backup and Restore requirements.
+4. Invalid and exception samples.
+5. Device and browser matrix.
+6. Network and server design.
+7. Recovery targets.
+8. Test Strategy.
+
+### P2 - Required Before Pilot or Production
+
+1. Deployment and rollback runbook.
+2. Performance benchmark plan.
+3. Training material.
+4. Support and defect-escalation process.
+5. Named approvers for Data, Warehouse Management and IT.
+
+## 10. Public Repository Data Rules
+
+The repository is public.
+
+The following must never be committed:
+
+- Production pb_data.
+- Database files.
+- Passwords.
+- Tokens.
+- API keys.
+- Environment secrets.
+- Employee personal information.
+- Customer-confidential information.
+- Supplier-confidential information.
+- Real financial data.
+- Confidential SOP documents.
+- Unsanitized warehouse files.
+
+Files placed under samples/sanitized must be reviewed before commit.
+
+Replacing a name with another realistic name is not sufficient anonymization if the remaining data can identify a real person, customer, supplier, SKU, order or transaction.
+
+## 11. Conflict Resolution
+
+When two sources conflict:
+
+1. Stop implementation.
+2. Record the conflict.
+3. Identify the controlling source and document version.
+4. Request a decision from the Scope Owner.
+5. Update the affected document through a new version.
+6. Preserve the old version and decision history.
+7. Resume only after written approval.
+
+AI must not silently select the rule it considers more reasonable.
+
+## 12. Stage 0 Blocking Verdict
+
+Current verdict:
+
+`STAGE 0 IN PROGRESS - SOURCE EVIDENCE INCOMPLETE`
+
+The following work is permitted:
+
+- Repository setup.
+- Documentation inventory.
+- Evidence collection.
+- Sanitization planning.
+- Requirement clarification.
+- Non-functional platform planning.
+
+The following work is not yet permitted:
+
+- Final collection design.
+- Final PocketBase migrations.
+- Cycle Count business logic.
+- Offline synchronization implementation.
+- Recount and Approval implementation.
+- Production permission rules.
+- Production Release claim.
+
+
+## 12.1 Controlling Golden Sample Decision
+
+Effective from BRD/SRS v2.9, the sole controlling Golden Sample root is:
+
+`tests/fixtures/cycle-count/golden/20260715182904Nguyen Duc Trong_Location Inventory_VN Ho Chi Minh DC.xls`
+
+Locked technical profile:
+
+- Actual format: Excel 2003 XML Spreadsheet with `.xls` extension.
+- Worksheet: Table1.
+- Data rows: 3926.
+- Source columns: 21.
+- Unique locations: 1966.
+- Unique Goods ID: 643.
+- Total Qty: 98804.0.
+- File size: 5308206 bytes.
+- MD5: `0d0edde76378720ba2eb9bc5f086fba7`.
+- SHA-256: `1f2f117b22c17d15455d03d4c07908690490dda2eebbe28f4174cc7c6fb5b8f3`.
+
+The former file:
+
+`20260610114449Nguyen Duc Trong_Location Inventory_VN Ho Chi Minh DC.xls`
+
+is historical reference only.
+
+It must not be used to determine PASS or FAIL for:
+
+- Golden Sample Regression.
+- Inventory parser acceptance.
+- Location Parser acceptance.
+- Stock Snapshot reconciliation.
+- Application Release Gate.
+
+Replacing or renaming another file to the controlling filename is not acceptable. The SHA-256 checksum must match the locked value.
+
+## 12.2 Current Evidence Verdict
+
+The following evidence is verified:
+
+- BRD/SRS v2.9 exists in the repository working tree.
+- The controlling Golden Sample exists in the repository working tree.
+- The Golden Sample SHA-256 checksum matches BRD/SRS v2.9.
+- SKU source file exists in the repository working tree and passed XML Spreadsheet integrity validation.
+- Location Master exists in the repository working tree and passed XLSX ZIP integrity validation.
+- Application regression against the new Golden Sample has not yet been run.
+- Full offline and synchronization requirements remain incomplete.
+
+Current verdict:
+
+`STAGE 0 IN PROGRESS - CONTROLLING SOURCES IDENTIFIED, EVIDENCE UPLOAD AND REGRESSION INCOMPLETE`
+
+
+
+## 12.3 SKU and Location Source Profiles
+
+### SKU Source
+
+- Repository path: `samples/source/sku/20260707153049Nguyen Duc Trong_SKU Basic Information_VN Ho Chi Minh DC.xls`
+- Actual format: Excel 2003 XML Spreadsheet.
+- Worksheet: Table1.
+- File size: 1279673 bytes.
+- SHA-256: `0fca89566e1dd156da099e1527c148607b8d3437f46937a4ad947c58881f21f3`.
+- Integrity status: PASS.
+
+### Location Source
+
+- Repository path: `samples/source/location/Location master.xlsx`
+- Actual format: XLSX workbook.
+- File size: 432371 bytes.
+- SHA-256: `4e7c72da155c927e4bd4507dca67af5424e9330673337638c31681260b63b73c`.
+- ZIP integrity status: PASS.
+
+These files are approved as controlling source files for design and testing.
+
+Approval of the source files does not automatically approve:
+
+- Final SKU schema.
+- Final Location schema.
+- Final Location Parser implementation.
+- PocketBase migrations.
+- Application Release.
+
+Those outputs still require implementation evidence and regression tests.
+
+
+
+## 12.4 Open Evidence and Decision Register
+
+This section is the controlling register for missing evidence, open decisions, waivers and Phase Gates.
+
+A separate Missing Evidence Register must not be created unless the project scale later requires independent governance.
+
+Missing evidence must not be replaced with AI assumptions.
+
+When a mandatory decision is incomplete, the required verdict is:
+
+`INSUFFICIENT EVIDENCE TO IMPLEMENT`
+
+| ID | Missing, Partial or Open Item | Status | Impact | Required Resolution |
+|---|---|---|---|---|
+| ME-001 | Full offline and synchronization rules | PARTIAL - BLOCKER | Blocks full offline architecture and implementation | Define persistence, operation ID, idempotency, retry, acknowledgement, reconnect and partial-failure behavior |
+| ME-002 | Multi-device conflict rules | MISSING - BLOCKER | Blocks concurrent count and synchronization behavior | Define behavior when multiple devices process the same task or stock line |
+| ME-003 | Inventory source-of-truth architecture decision | OPEN DECISION - BLOCKER | Blocks final Inventory schema and migration approval | Decide whether Warehouse Suite stores snapshots, current balances, movement history or a hybrid model |
+| ME-004 | Final user and role matrix | PARTIAL - BLOCKER | Blocks final authentication and authorization design | Confirm final roles, permitted actions and data boundaries |
+| ME-005 | Role and action permission matrix | MISSING - BLOCKER | Blocks production PocketBase API rules | Define collection-level and record-level permissions |
+| ME-006 | Cycle Count status and transition model | PARTIAL - BLOCKER | Blocks final workflow validation | Lock statuses, transitions, actors, conditions and terminal states |
+| ME-007 | Machine-readable Golden Sample expected output | PARTIAL - BLOCKER | Blocks executable Golden Sample Regression | Create expected profile, parser assertions and reconciliation results |
+| ME-008 | Final Location Parser pattern catalogue | PARTIAL - BLOCKER | Blocks Location Parser acceptance | Profile the controlling source files and lock recognized pattern families and fallback behavior |
+| ME-009 | Entity relationship model | MISSING - BLOCKER | Blocks final database design approval | Define entity relationships, ownership, keys and data lifecycle |
+| ME-010 | Core data dictionaries | MISSING - BLOCKER | Blocks final PocketBase migrations | Create SKU, Location, Inventory and Cycle Count data dictionaries |
+| ME-011 | Recount and Approval rule catalogue | PARTIAL | Blocks final Recount and Approval implementation | Consolidate thresholds, actors, rounds, approval conditions and override rules |
+| ME-012 | Audit event catalogue | MISSING | Blocks Audit Log implementation | Define required events, actors, timestamps, before/after values and retention |
+| ME-013 | Dashboard KPI definitions | PARTIAL | Blocks final Dashboard calculations | Lock formulas, filters, time basis, scope and reconciliation rules |
+| ME-014 | Backup and Restore requirements | PARTIAL | Blocks final Backup and Restore design | Lock schedule, retention, recovery target, location, ownership and restore validation |
+| ME-015 | Device and browser matrix | MISSING | Blocks mobile and offline validation | Identify pilot mobile devices, browsers, operating systems and minimum supported versions |
+| ME-016 | Network and server design | MISSING | Blocks pilot deployment | Define local server, network access, availability, monitoring and recovery approach |
+| ME-017 | Negative and exception fixtures | MISSING | Blocks exception-path regression | Create invalid files, missing headers, duplicate processing, sync failure and permission fixtures |
+| ME-018 | Cycle Count task and result samples | MISSING | Blocks final task/result schema validation | Provide or generate approved expected examples from locked requirements |
+
+## 12.5 Waived and Deferred Items
+
+| ID | Evidence or Capability | Decision | Constraint |
+|---|---|---|---|
+| WV-001 | Formal current-state Cycle Count SOP | WAIVED FOR MVP | BRD/SRS v2.9 controls MVP behavior; undocumented rules must not be invented |
+| WV-002 | Data sanitization activity | NOT REQUIRED BY SCOPE OWNER | Scope Owner confirmed supplied project files contain no sensitive data |
+| WV-003 | Physical barcode scanning test | DEFERRED | Not required unless barcode scanning is added to MVP scope |
+| WV-004 | Paid cloud infrastructure | DEFERRED | Pilot prioritizes local or free options unless a later approved decision changes this |
+| WV-005 | Separate Missing Evidence Register | NOT REQUIRED AT CURRENT SCALE | Missing evidence, decisions, waivers and gates are controlled in this document |
+
+## 12.6 Required Architecture Decisions
+
+### DEC-001 - Inventory Data Model
+
+A controlling decision must select one model:
+
+1. Snapshot-only model.
+2. Current balance model.
+3. Movement ledger model.
+4. Hybrid snapshot, balance and movement model.
+
+No final Inventory migration may be approved before this decision.
+
+### DEC-002 - Offline Scope
+
+MVP offline capability must be classified as one of:
+
+1. Local draft only.
+2. Local queue with automatic retry.
+3. Full multi-device offline synchronization.
+4. Deferred until after online MVP.
+
+BRD/SRS v2.9 defines Offline-lite behavior but does not fully define multi-device synchronization.
+
+### DEC-003 - Role and Permission Model
+
+The provisional roles are:
+
+- Admin.
+- Supervisor.
+- Counter or Operator.
+- Approver.
+- Viewer.
+
+Final actions, record visibility and approval boundaries remain to be approved.
+
+## 12.7 Phase Permission Gate
+
+### Work Currently Permitted
+
+The following work may proceed:
+
+- Source-file profiling.
+- Data-quality analysis.
+- Golden Sample fixture preparation.
+- Machine-readable expected-output preparation.
+- Requirement clarification.
+- Candidate architecture options.
+- Candidate data dictionaries.
+- Candidate workflow and status models.
+- Test-strategy preparation.
+- Prototypes clearly marked as non-final.
+
+### Work Not Yet Approved
+
+The following work must not be represented as final:
+
+- Final PocketBase migrations.
+- Final Inventory data model.
+- Full offline synchronization implementation.
+- Production permission rules.
+- Final Location Parser acceptance.
+- Final deployment architecture.
+- Production Release.
+- Golden Sample Regression PASS without executable evidence.
+
+Any prototype or implementation created before these gates close must be labelled:
+
+`CANDIDATE - NOT RELEASE APPROVED`
+
+## 12.8 Phase 0 Exit Gate
+
+Phase 0 may close only when the following P0 items are resolved or formally deferred:
+
+- Inventory source-of-truth architecture decision.
+- MVP Offline scope decision.
+- Final role and permission matrix.
+- Final Location Parser pattern catalogue.
+- Core data dictionaries.
+- Entity relationship model.
+- Cycle Count status and transition model.
+- Machine-readable Golden Sample expected output.
+- Test Strategy and acceptance-gate definitions.
+
+Current Phase verdict:
+
+`PHASE 0 IN PROGRESS - CONTROLLING SOURCES VERIFIED, OPEN DESIGN DECISIONS REMAIN`
+
+Current Release verdict:
+
+`CANDIDATE - RELEASE GATE NOT PASSED`
+
+
+## 13. Change History
+
+| Version | Date | Change | Approved By |
+|---|---|---|---|
+| 1.0 | 2026-07-16 | Initial Source-of-Truth Inventory created | DucTrong Nguyen |
+| 1.1 | 2026-07-16 | Registered BRD/SRS v2.9 and the 20260715182904 inventory file as the controlling Golden Sample root; recorded source-file evidence status and retained offline/sync blocker | DucTrong Nguyen |
+| 1.2 | 2026-07-16 | Registered and verified the SKU source file and Location Master, including file format, size and SHA-256 checksums | DucTrong Nguyen |
+| 1.3 | 2026-07-16 | Consolidated missing evidence, open architecture decisions, waivers, deferred items and Phase Gates into the Source-of-Truth Inventory; a separate Missing Evidence Register was intentionally not created | DucTrong Nguyen |
