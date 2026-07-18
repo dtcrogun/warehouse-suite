@@ -4,9 +4,13 @@ title: Warehouse Suite Documentation
 
 # Warehouse Suite Documentation
 
+## Agent Retrieval Test
+
+- ./AGENT_READ_TEST.html
+
 ## Source of Truth
 
-- requirements/SOURCE_OF_TRUTH_INVENTORY_v1.3.md
+- ./requirements/SOURCE_OF_TRUTH_INVENTORY_v1.3.html
 
 ## Project
 
