@@ -6,11 +6,15 @@ title: Warehouse Suite Documentation
 
 ## Agent Retrieval Test
 
-- ./AGENT_READ_TEST.html
+/warehouse-suite/AGENT_READ_TEST.html
+Open Agent Read Test
+</a>
 
 ## Source of Truth
 
-- ./requirements/SOURCE_OF_TRUTH_INVENTORY_v1.3.html
+/warehouse-suite/requirements/SOURCE_OF_TRUTH_INVENTORY_v1.3.html
+Open Source of Truth Inventory v1.3
+</a>
 
 ## Project
 
